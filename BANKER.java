@@ -48,6 +48,13 @@ public class BANKER {
             for(j=0;j<rno;j++){
                 System.out.println("process no :"+ i);
                 alloc[i][j]=sc.nextInt();
+
+                if(alloc[i][j]>rc[j]){
+                    System.out.println("the allocated is more than the total avilable resource");
+                    System.out.println("give the value again");
+                    alloc[i][j]=sc.nextInt();
+                    
+                }
             }
         }
         //needmatrix
@@ -79,25 +86,29 @@ public class BANKER {
 
     //safe check
 
-    for(i=0;i<pno;i++){
-        for(j=0;j<rno;j++){
-            if(need[i][j]<=avail[j] && finish[i]==-1){
-                flag=0;
-            }
-            if(need[i][j]>avail[j]){
-                flag=1;
-                break;
-            }
-        }
-       
-            if(flag==0){
-                finish[i]=1;
-                for(j=0;j<rno;j++){
-                    avail[j]=avail[j]+alloc[i][j];
+    for(k=0;k<pno;k++){
+
+        for(i=0;i<pno;i++){
+            for(j=0;j<rno;j++){
+                if(need[i][j]<=avail[j] && finish[i]==-1){
+                    flag=0;
+                }
+                if(need[i][j]>avail[j]){
+                    flag=1;
+                    break;
                 }
             }
         
-    }
+                if(flag==0){
+                    finish[i]=1;
+                    for(j=0;j<rno;j++){
+                        avail[j]=avail[j]+alloc[i][j];
+                    }
+                }
+            
+        }
+    }//safe check end
+
     for(i=0;i<pno;i++){
         System.out.println(finish[i]);
     }
