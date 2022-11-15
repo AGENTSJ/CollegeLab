@@ -31,6 +31,15 @@ public class BANKER {
             for(j=0;j<rno;j++){
                 System.out.println("process no :"+i);
                 max[i][j]=sc.nextInt();
+                
+                //if needed more than total
+
+                if(max[i][j]>rc[j]){
+                    System.out.println("the need is more than the total avilable resource");
+                    System.out.println("give the value again");
+                    max[i][j]=sc.nextInt();
+                    
+                }
             }
         }
         //allocated
@@ -72,7 +81,7 @@ public class BANKER {
 
     for(i=0;i<pno;i++){
         for(j=0;j<rno;j++){
-            if(need[i][j]<=avail[j]){
+            if(need[i][j]<=avail[j] && finish[i]==-1){
                 flag=0;
             }
             if(need[i][j]>avail[j]){
