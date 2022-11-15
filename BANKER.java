@@ -11,7 +11,7 @@ public class BANKER {
         int[][]alloc=new int[20][20];//allocated 
         int[]avail = new int[20];//avilable
         int[]finish = new int[20];//finish
-        int[][]flex= new int[20][20];
+        int fnl =0 ;//a flag find if all process are finished or not
         int flag = 0;
 
         int i,j,k ,temp =0;
@@ -29,7 +29,7 @@ public class BANKER {
         System.out.println("give the maximum needed by process");
         for(i=0;i<pno;i++){
             for(j=0;j<rno;j++){
-                System.out.println("process no :"+i);
+                System.out.println("process no :"+ i +"-----resource no : "+j);
                 max[i][j]=sc.nextInt();
                 
                 //if needed more than total
@@ -46,7 +46,7 @@ public class BANKER {
         System.out.println("give the resources allocated");
         for(i=0;i<pno;i++){
             for(j=0;j<rno;j++){
-                System.out.println("process no :"+ i);
+                System.out.println("process no :"+ i +"-----resource no : "+j);
                 alloc[i][j]=sc.nextInt();
 
                 if(alloc[i][j]>rc[j]){
@@ -77,7 +77,7 @@ public class BANKER {
             avail[j]=avail[j]-alloc[i][j];
         }
        }
-       System.out.println("executed next safe ");
+       
 
     // setting finish as -1
        for(i=0;i<pno;i++){
@@ -110,7 +110,17 @@ public class BANKER {
     }//safe check end
 
     for(i=0;i<pno;i++){
-        System.out.println(finish[i]);
+        System.out.println();
+        if(finish[i]==-1){
+            System.out.println("the sytem is not safe and can lead to dead lock ");
+            System.out.println("process no "+ i+" is not finished");
+            fnl=1;
+            break;
+            
+        }  
+    }
+    if(fnl==0){
+        System.out.println("the sytem is safe and all process can be executed");    
     }
    
 
